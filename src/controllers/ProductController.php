@@ -29,6 +29,9 @@ class ProductController extends BaseController
 
     public function displayUpdatedProductInJson()
     {
+        $id = $_GET['id'];
+        // Appeler la méthode "addQuantity" du modèle avec l'ID de produit en paramètre
+        $this->model->changeQuantity($id, -1);
         $product = $this->model->getOne(($_GET['id']));
         echo json_encode($product);
     }
@@ -43,14 +46,17 @@ class ProductController extends BaseController
     {
         // Appeler la méthode "insertInDb" du modèle
         $this->model->insertInDb($_POST);
+        $_SESSION['notification'] = 'nouveau produit ajouté !';
         header("Location: /product");
     }
+
 
     public function addTen()
     {
         $id = $_GET['id'];
         // Appeler la méthode "addQuantity" du modèle avec l'ID de produit en paramètre
         $this->model->changeQuantity($id, 10);
+        $_SESSION['notification'] = 'commande réussie !';
         header("Location: /product");
     }
 
@@ -64,6 +70,7 @@ class ProductController extends BaseController
     public function update()
     {
         $this->model->updateInDb($_POST);
+        $_SESSION['notification'] = 'le produit a été mis à jour avec succès !';
         header("Location: /product");
     }
 
@@ -72,6 +79,7 @@ class ProductController extends BaseController
         $id = $_GET['id'];
         // Appeler la méthode "deleteInDb" du modèle avec l'ID de produit en paramètre
         $this->model->deleteInDb($id);
+        $_SESSION['notification'] = 'suppression effectuée !';
         header("Location: /product");
     }
 }

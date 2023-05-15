@@ -13,19 +13,20 @@
     <form action="/employee/create" method="post">
 
         <label for="product_name">nom :</label>
-        <input class="form-control rounded" type="text" name="name" placeholder="nom salarié.e"><br>
+        <input class="form-control rounded" type="text" name="name" placeholder="nom salarié.e" required><br>
 
         <label for="product_name">crédits :</label>
-        <input class="form-control rounded" type="text" name="credits" placeholder="crédits"><br>
+        <input class="form-control rounded" type="number" name="credits" placeholder="crédits" required><br>
 
         <label for="product_name">email :</label>
-        <input class="form-control rounded" type="text" name="email" placeholder="email"><br>
+        <input class="form-control rounded" type="text" name="email" placeholder="email" required
+            pattern="^[\w.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"><br>
 
-        <label for="product_name">mot de passe :</label>
-        <input class="form-control rounded" type="text" name="password" placeholder="mot de passe"><br>
+        <label for=" product_name">mot de passe :</label>
+        <input class="form-control rounded" type="text" name="password" placeholder="mot de passe" required><br>
 
         <label for="product_name">statut salarié.e :</label>
-        <input class="form-control rounded" type="text" name="is_admin" placeholder="admin?"><br>
+        <input class="form-control rounded" type="number" name="is_admin" placeholder="admin?" required><br>
 
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-light btn-outline-dark"><strong>enregistrer</strong></button>

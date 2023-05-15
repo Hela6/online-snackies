@@ -12,16 +12,16 @@
 <div class="d-flex justify-content-center">
     <form action="/product/update" method="post">
         <p><strong>ID du produit : {{ p.id|e }}</strong></p>
-        <input class="form-control rounded" type="text" name="id" value="{{ p.id|e }}" readonly><br>
+        <input class="form-control rounded" type="number" name="id" value="{{ p.id|e }}" readonly><br>
 
         <label for="product_name">nom du produit :</label>
         <input class="form-control rounded" type="text" name="name" value="{{ p.name|e }}"><br>
 
         <label for="product_name">prix du produit :</label>
-        <input class="form-control rounded" type="text" name="price" value="{{ p.price|e }}"><br>
+        <input class="form-control rounded" type="number" name="price" value="{{ p.price|e }}"><br>
 
         <label for="product_name">quantité du produit :</label>
-        <input class="form-control rounded" type="text" name="quantity" value="{{ p.quantity|e }}"><br>
+        <input class="form-control rounded" type="number" name="quantity" value="{{ p.quantity|e }}"><br>
 
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-light btn-outline-dark"><strong>enregistrer</strong></button>

@@ -9,17 +9,22 @@
 {% block content %}
 <h2 class="d-flex justify-content-center  edit-or-add">Ajouter un produit :</h2>
 
+{# <div class="notification">
+    {{session}}
+</div> #}
+
 <div class="d-flex justify-content-center">
     <form action="/product/create" method="post">
 
         <label for="product_name">nom du produit :</label>
-        <input class="form-control rounded" type="text" name="name" placeholder="nom du produit"><br>
+        <input class="form-control rounded" type="text" name="name" placeholder="nom du produit" required><br>
 
         <label for="product_name">prix du produit :</label>
-        <input class="form-control rounded" type="text" name="price" placeholder="prix du produit"><br>
+        <input class="form-control rounded" type="number" name="price" placeholder="prix du produit" required><br>
 
         <label for="product_name">quantité du produit :</label>
-        <input class="form-control rounded" type="text" name="quantity" placeholder="quantité du produit"><br>
+        <input class="form-control rounded" type="number" name="quantity" placeholder="quantité du produit"
+            required><br>
 
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-light btn-outline-dark"><strong>enregistrer</strong></button>

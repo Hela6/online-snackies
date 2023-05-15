@@ -11,6 +11,7 @@
 <div class="product-container"></div>
 
 <h2 class="d-flex justify-content-center">Liste des Produits :</h2>
+<p class="d-flex justify-content-center notif">{{session.notification}}</p>
 
 <table class="table">
     <thead>
@@ -58,4 +59,15 @@
 
 </div>
 
+{% block javascript %}
+<script>
+    // Select the <p> element by its class
+    const pElement = document.querySelector('.notif');
+
+    // Hide the element after 5 seconds
+    setTimeout(() => {
+        pElement.style.color = '#19181b';
+    }, 3000);
+</script>
+{% endblock %}
 {% endblock %}

@@ -12,19 +12,19 @@
 <div class="d-flex justify-content-center">
     <form action="/employee/update" method="post">
         <p><strong>ID salarié.e : {{ e.id|e }}</strong></p>
-        <input class="form-control rounded" type="text" name="id" value="{{ e.id|e }}" readonly><br>
+        <input class="form-control rounded" type="number" name="id" value="{{ e.id|e }}" readonly><br>
 
         <label for="employee_name">nom du salarié.e :</label>
         <input class="form-control rounded" type="text" name="name" value="{{ e.name|e }}"><br>
 
         <label for="employee">credits du salarié.e :</label>
-        <input class="form-control rounded" type="text" name="credits" value="{{ e.credits|e }}"><br>
+        <input class="form-control rounded" type="number" name="credits" value="{{ e.credits|e }}"><br>
 
         <label for="employee">email salarié.e :</label>
         <input class="form-control rounded" type="text" name="email" value="{{ e.email|e }}"><br>
 
         <label for="employee">statut salarié.e :</label>
-        <input class="form-control rounded" type="text" name="is_admin" value="{{ e.is_admin|e }}"><br>
+        <input class="form-control rounded" type="number" name="is_admin" value="{{ e.is_admin|e }}"><br>
 
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-light btn-outline-dark"><strong>enregistrer</strong></button>

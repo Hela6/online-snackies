@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block login %}{% endblock %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block content %}
+<h2 class="d-flex justify-content-center edit-or-add">Ajouter un.e salarié.e :</h2>
+
+<div class="d-flex justify-content-center">
+    <form action="/employee/create" method="post">
+
+        <label for="product_name">nom :</label>
+        <input class="form-control rounded" type="text" name="name" placeholder="nom salarié.e"><br>
+
+        <label for="product_name">crédits :</label>
+        <input class="form-control rounded" type="text" name="credits" placeholder="crédits"><br>
+
+        <label for="product_name">email :</label>
+        <input class="form-control rounded" type="text" name="email" placeholder="email"><br>
+
+        <label for="product_name">mot de passe :</label>
+        <input class="form-control rounded" type="text" name="password" placeholder="mot de passe"><br>
+
+        <label for="product_name">statut salarié.e :</label>
+        <input class="form-control rounded" type="text" name="is_admin" placeholder="admin?"><br>
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-light btn-outline-dark"><strong>enregistrer</strong></button>
+        </div>
+
+</div>
+
+{% endblock %}

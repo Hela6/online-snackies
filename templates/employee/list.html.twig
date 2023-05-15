@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+
+{% block login %}{% endblock %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block content %}
+
+<div class="product-container"></div>
+
+<h2 class="d-flex justify-content-center">Liste des salarié.e.s :</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col" class="text-center p-3 align-middle">id</th>
+            <th scope="col" class="text-center p-3 align-middle">nom</th>
+            <th scope="col" class="text-center p-3 align-middle">crédits</th>
+            <th scope="col" class="text-center p-3 align-middle">email</th>
+            <th scope="col" class="text-center p-3 align-middle">is admin</th>
+            <th scope="col" class="text-center p-3 align-middle">ajout crédits</th>
+            <th scope="col" class="text-center p-3 align-middle">modifier</th>
+            <th scope="col" class="text-center p-3 align-middle">supprimer</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for e in employees %}
+        <tr>
+            <td scope="col" class="text-center p-3 align-middle">{{ e.id|e }}</td>
+            <td scope="col" class="text-center p-3 align-middle">{{ e.name|e }}</td>
+            <td scope="col" class="text-center p-3 align-middle">{{ e.credits|e }}</td>
+            <td scope="col" class="text-center p-3 align-middle">{{ e.email|e }}</td>
+            <td scope="col" class="text-center p-3 align-middle">{{ e.is_admin|e }}</td>
+            <td scope="col" class="text-center p-3">
+                <a href="/employee/restock?id={{ e.id|e }}"><button class="btn btn-info">+ 50</button></a>
+            </td>
+
+            <td scope="col" class="text-center p-3">
+                <a href="/employee/edit?id={{ e.id|e }}"><button class="btn btn-primary">modifier</button></a>
+            </td>
+
+            <td scope="col" class="text-center p-3">
+                <a href="/employee/delete?id={{ e.id|e }}"><button class="btn btn-dark">supprimer</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-center">
+    <a href="/employee/displayForm"><button class="btn btn-light btn-outline-dark"><strong>ajouter un.e
+                salarié.e</strong></button></a>
+</div>
+
+</div>
+
+{% endblock %}

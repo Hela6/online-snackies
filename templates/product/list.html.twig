@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block login %}{% endblock %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+<div class="product-container"></div>
+
+<h2 class="d-flex justify-content-center">Liste des Produits :</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col" class="text-center p-3">id</th>
+            <th scope="col" class="text-center p-3">nom du produit</th>
+            <th scope="col" class="text-center p-3">prix unitaire</th>
+            <th scope="col" class="text-center p-3">quantité en stock</th>
+            <th scope="col" class="text-center p-3">commander</th>
+            <th scope="col" class="text-center p-3">modifier les infos</th>
+            <th scope="col" class="text-center p-3">supprimer la référence</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in products %}
+        <tr>
+            <td scope="col" class="text-center p-3">{{ p.id|e }}</td>
+            <td scope="col" class="text-center p-3 {% if p.quantity < 10 %}text-info{% endif %}">{{ p.name|e }}</td>
+            <td scope="col" class="text-center p-3">{{ p.price|e }}</td>
+            <td scope="col" class="text-center p-3 {% if p.quantity < 10 %}text-info{% endif %}">{{
+                p.quantity|e
+                }}</td>
+
+            <td scope="col" class="text-center p-3">
+                <a href="/product/restock?id={{ p.id|e }}"><button class="btn btn-info">commander 10</button></a>
+            </td>
+
+            <td scope="col" class="text-center p-3">
+                <a href="/product/edit?id={{ p.id|e }}"><button class="btn btn-primary">modifier</button></a>
+            </td>
+
+            <td scope="col" class="text-center p-3">
+                <a href="/product/delete?id={{ p.id|e }}"><button class="btn btn-dark">supprimer</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<div class="d-flex justify-content-center">
+    <a href="/product/displayForm"><button class="btn btn-light btn-outline-dark"><strong>ajouter un nouveau
+                produit</strong></button></a>
+</div>
+
+</div>
+
+{% endblock %}

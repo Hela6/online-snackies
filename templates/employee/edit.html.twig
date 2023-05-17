@@ -15,16 +15,17 @@
         <input class="form-control rounded" type="number" name="id" value="{{ e.id|e }}" readonly><br>
 
         <label for="employee_name">nom du salarié.e :</label>
-        <input class="form-control rounded" type="text" name="name" value="{{ e.name|e }}"><br>
+        <input class="form-control rounded" type="text" name="name" value="{{ e.name|e }}" required><br>
 
         <label for="employee">credits du salarié.e :</label>
-        <input class="form-control rounded" type="number" name="credits" value="{{ e.credits|e }}"><br>
+        <input class="form-control rounded" type="number" name="credits" value="{{ e.credits|e }}" required><br>
 
         <label for="employee">email salarié.e :</label>
-        <input class="form-control rounded" type="text" name="email" value="{{ e.email|e }}"><br>
+        <input class="form-control rounded" type="text" name="email" value="{{ e.email|e }}" required
+            pattern="^[\w.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"><br>
 
         <label for="employee">statut salarié.e :</label>
-        <input class="form-control rounded" type="number" name="is_admin" value="{{ e.is_admin|e }}"><br>
+        <input class="form-control rounded" type="number" name="is_admin" value="{{ e.is_admin|e }}" required><br>
 
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-light btn-outline-dark"><strong>enregistrer</strong></button>

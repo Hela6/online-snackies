@@ -15,19 +15,43 @@ class EmployeeController extends BaseController
         $this->model = new Employee();
     }
 
-    public function auth()
+    public function auth($checkAdmin = true)
     {
-        // verifier si les infos de login sont valides et si oui rediriger vers la route home
-        if (isset($_POST['email']) && isset($_POST['password'])) {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            $result = $this->model->checkCredentials($email, $password);
-            if ($result != false) {
-                $_SESSION['username'] = $result['name'];
-                header("Location: /");
-            } else {
-                // $_SESSION['username'] = ', veuillez vous connecter';
-                header("Location: /login");
+
+        if ($checkAdmin == false) {
+            header('Content-Type: application/json');
+            header("Access-Control-Allow-Origin: *");
+            header("Access-Control-Allow-Headers: *");
+
+            $json = file_get_contents('php://input');
+            $data = json_decode($json);
+
+            if (isset($data->email) && isset($data->password)) {
+                $email = $data->email;
+                $password = $data->password;
+                $result = $this->model->checkCredentials($email, $password, $checkAdmin);
+                if ($result == true) {
+                    header('Content-Type: application/json');
+                    header("Access-Control-Allow-Origin: *");
+                    $employeeData = $this->model->getOne($email);
+                    echo json_encode($employeeData);
+                } else {
+                    echo '{"success": false}';
+                }
+            }
+        } else {
+            // verifier si les infos de login sont valides et si oui rediriger vers la route home
+            if (isset($_POST['email']) && isset($_POST['password'])) {
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                $result = $this->model->checkCredentials($email, $password, $checkAdmin);
+                if ($result != false) {
+                    $_SESSION['username'] = $result['name'];
+                    header("Location: /");
+                } else {
+                    // $_SESSION['username'] = ', veuillez vous connecter';
+                    header("Location: /login");
+                }
             }
         }
     }

@@ -17,18 +17,22 @@ class ProductController extends BaseController
 
     public function displayList()
     {
-        $products = $this->model->getAll();
-        $this->render('/product/list.html.twig', ['products' => $products]);
+        $biscuits = $this->model->getAll();
+        $this->render('/product/list.html.twig', ['products' => $biscuits]);
     }
 
     public function displayInJson()
     {
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
         $products = $this->model->getAll();
         echo json_encode($products);
     }
 
     public function displayUpdatedProductInJson()
     {
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
         $id = $_GET['id'];
         // Appeler la méthode "addQuantity" du modèle avec l'ID de produit en paramètre
         $this->model->changeQuantity($id, -1);

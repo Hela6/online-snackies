@@ -13,10 +13,14 @@ class Employee extends BaseModel
         $this->getConnection();
     }
 
-    public function checkCredentials($email, $password)
+    public function checkCredentials($email, $password, $checkAdmin = true)
     {
         // Faire une requête SQL pour récupérer les infos de login dans la base de données AND is_admin=1
-        $sql = "SELECT * FROM $this->table WHERE email = :email AND is_admin=1";
+        if ($checkAdmin == true) {
+            $sql = "SELECT * FROM $this->table WHERE email = :email AND is_admin=1";
+        } else {
+            $sql = "SELECT * FROM $this->table WHERE email = :email";
+        }
         $query = $this->_connexion->prepare($sql);
         $query->bindValue(':email', $email);
         $query->execute();
@@ -24,6 +28,7 @@ class Employee extends BaseModel
 
         // Vérifier si l'utilisateurice a été trouvé.e et si le mot de passe est correct
         if ($user && password_verify($password, $user['password'])) {
+
             // L'utilisateurice est authentifié.e avec succès
             return $user;
         } else {
@@ -31,6 +36,15 @@ class Employee extends BaseModel
             return false;
         }
     }
+
+    public function getOne($email)
+    {
+        $sql = "SELECT * FROM " . $this->table . " WHERE id=" . $email;
+        $query = $this->_connexion->prepare($sql);
+        $query->execute();
+        return $query->fetch();
+    }
+
 
     public function insertInDb()
     {

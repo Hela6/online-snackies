@@ -5,6 +5,7 @@ namespace core;
 use src\controllers\HomeController;
 use src\controllers\ProductController;
 use src\controllers\EmployeeController;
+use src\controllers\FavController;
 
 class App
 {
@@ -16,7 +17,19 @@ class App
     public function run()
     {
         $uri =  strtok($_SERVER['REQUEST_URI'], "?");
-        if (isset($_SESSION['username'])) {
+        if ($uri == '/api/products') {
+            $controller = new ProductController();
+            $controller->displayInJson();
+        } else if ($uri == '/api/product/consume' && isset($_GET['id'])) {
+            $controller = new ProductController();
+            $controller->displayUpdatedProductInJson();
+        } else if ($uri == '/api/fav' && isset($_GET['id_employee'])) {
+            $controller = new FavController();
+            $controller->displayFavInJson();
+        } else if ($uri == '/api/auth') {
+            $controller = new EmployeeController();
+            $controller->auth(false);
+        } else if (isset($_SESSION['username'])) {
             if ($uri == '/') {
                 $controller = new HomeController();
                 $controller->home();
@@ -62,12 +75,6 @@ class App
             } else if ($uri == '/product/create') {
                 $controller = new ProductController();
                 $controller->create();
-            } else if ($uri == '/api/products') {
-                $controller = new ProductController();
-                $controller->displayInJson();
-            } else if ($uri == '/api/product/consume' && isset($_GET['id'])) {
-                $controller = new ProductController();
-                $controller->displayUpdatedProductInJson();
             } else if ($uri == '/logout') {
                 $controller = new EmployeeController();
                 $controller->logOut();

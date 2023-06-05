@@ -3,7 +3,9 @@
 namespace src\controllers;
 
 use core\BaseController;
+
 use src\models\Fav;
+use src\models\Product;
 
 
 class FavController extends BaseController
@@ -13,32 +15,39 @@ class FavController extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->model = new Fav();
+        $this->model = new Product();
     }
 
-    public function displayFavInJson()
+    public function displayFavsInJson()
     {
         header('Content-Type: application/json');
         header("Access-Control-Allow-Origin: *");
-        $favs = $this->model->getAll();
-        echo json_encode($favs);
+        if (isset($_GET['id_employee'])) {
+            $id_employee = $_GET['id_employee'];
+            $favs = $this->model->getAllFavs($id_employee);
+            echo json_encode($favs);
+        }
     }
 
     public function addToFavs()
     {
-        if (isset($_POST['id_employee']) && isset($_POST['id_product'])) {
-            $id_employee = $_POST['id_employee'];
-            $id_product = $_POST['id_product'];
-            $this->model->insertInDb($id_employee, $id_product);
-        }
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        $id_product = $_GET['id_product'];
+        $id_employee = $_GET['id_employee'];
+        $favModel = new Fav;
+        $addedFav = $favModel->insertInDb($id_employee, $id_product);
+        echo json_encode($addedFav);
     }
 
-    public function deleteFromFavs()
+    public function removeFromFavs()
     {
-        $id = $_GET['id'];
-        // Appeler la méthode "deleteInDb" du modèle avec l'ID de produit en paramètre
-        $this->model->deleteInDb($id);
-        $_SESSION['notification'] = 'suppression effectuée !';
-        header("Location: /fav");
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        $id_product = $_GET['id_product'];
+        $id_employee = $_GET['id_employee'];
+        $favModel = new Fav;
+        $removedFav = $favModel->deleteInDb($id_employee, $id_product);
+        echo json_encode($removedFav);
     }
 }

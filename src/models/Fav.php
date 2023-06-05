@@ -22,21 +22,13 @@ class Fav extends BaseModel
         $query->execute();
     }
 
-    public function count()
-    {
-        // Faire une requête SQL pour récupérer le nombre total d'entrées dans la table
-        $sql = "SELECT COUNT(*) FROM $this->table";
-        $query = $this->_connexion->prepare($sql);
-        $query->execute();
-        $totalInTable = $query->fetchColumn();
-        return $totalInTable;
-    }
-
-    public function deleteInDb($id)
+    public function deleteInDb($id_employee, $id_product)
     {
         // supprimer la ligne du produit dans la base de données
-        $sql = "DELETE FROM $this->table WHERE id= $id";
+        $sql = "DELETE FROM $this->table WHERE (id_employee = :id_employee) AND (id_product = :id_product)";
         $query = $this->_connexion->prepare($sql);
+        $query->bindValue(':id_employee', $id_employee);
+        $query->bindValue(':id_product', $id_product);
         $query->execute();
     }
 }

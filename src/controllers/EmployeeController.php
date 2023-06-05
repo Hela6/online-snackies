@@ -33,7 +33,7 @@ class EmployeeController extends BaseController
                 if ($result == true) {
                     header('Content-Type: application/json');
                     header("Access-Control-Allow-Origin: *");
-                    $employeeData = $this->model->getOne($email);
+                    $employeeData = $this->model->getOneByEmail($email);
                     echo json_encode($employeeData);
                 } else {
                     echo '{"success": false}';
@@ -68,6 +68,14 @@ class EmployeeController extends BaseController
         $employees = $this->model->getAll();
         $this->render('employee/list.html.twig', ['employees' => $employees]);
     }
+
+    // public function displayEmployeeInJson()
+    // {
+    //     header('Content-Type: application/json');
+    //     header("Access-Control-Allow-Origin: *");
+    //     $employee = $this->model->getOne($id);
+    //     echo json_encode($employee);
+    // }
 
     public function displayForm()
     {

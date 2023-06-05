@@ -23,9 +23,15 @@ class App
         } else if ($uri == '/api/product/consume' && isset($_GET['id'])) {
             $controller = new ProductController();
             $controller->displayUpdatedProductInJson();
-        } else if ($uri == '/api/fav' && isset($_GET['id_employee'])) {
+        } else if ($uri == '/api/products/favs' && isset($_GET['id_employee'])) {
             $controller = new FavController();
-            $controller->displayFavInJson();
+            $controller->displayFavsInJson();
+        } else if ($uri == '/api/products/addToFavs' && isset($_GET['id_product']) && isset($_GET['id_employee'])) {
+            $controller = new FavController();
+            $controller->addToFavs();
+        } else if ($uri == '/api/products/removeFromFavs' && isset($_GET['id_product']) && isset($_GET['id_employee'])) {
+            $controller = new FavController();
+            $controller->removeFromFavs();
         } else if ($uri == '/api/auth') {
             $controller = new EmployeeController();
             $controller->auth(false);

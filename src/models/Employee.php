@@ -37,14 +37,15 @@ class Employee extends BaseModel
         }
     }
 
-    public function getOne($email)
+    public function getOneByEmail($email)
     {
-        $sql = "SELECT * FROM " . $this->table . " WHERE id=" . $email;
-        $query = $this->_connexion->prepare($sql);
-        $query->execute();
-        return $query->fetch();
-    }
+        $sql = "SELECT * FROM " . $this->table . " WHERE email= :email";
 
+        $query = $this->_connexion->prepare($sql);
+        $query->bindValue(':email', $email);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
 
     public function insertInDb()
     {

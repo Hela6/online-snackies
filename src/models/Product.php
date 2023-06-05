@@ -3,6 +3,7 @@
 namespace src\models;
 
 use core\BaseModel;
+use PDO;
 
 class Product extends BaseModel
 {
@@ -20,6 +21,20 @@ class Product extends BaseModel
         $query->execute();
         $totalInTable = $query->fetchColumn();
         return $totalInTable;
+    }
+
+    public function getAllFavs($employee_id)
+    {
+        $sql = "SELECT products.*
+        FROM products
+        JOIN favs ON products.id = favs.id_product
+        WHERE favs.id_employee = :employee_id";
+
+        $query = $this->_connexion->prepare($sql);
+        $query->bindParam(':employee_id', $employee_id);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function insertInDb()
